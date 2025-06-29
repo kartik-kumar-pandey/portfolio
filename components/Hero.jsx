@@ -50,12 +50,32 @@ const Hero = () => {
       </section>
 
       <section id="introduce" className="introduce">
-        <h2>LET ME <span className="highlight">INTRODUCE</span> MYSELF</h2>
-        <p>
-          I'm a passionate and curious developer currently pursuing my B.Tech in Computer Science. 
-          I enjoy building intuitive web applications, solving real-world problems, and constantly learning new technologies. 
-          With experience in full-stack development, I'm focused on creating impactful digital solutions and always open to exciting opportunities.
-        </p>
+        <div className="introduce-text">
+          <h2>LET ME <span className="highlight">INTRODUCE</span> MYSELF</h2>
+          <p>
+            I fell in love with programming and I have at least learnt something, I think... <span role="img" aria-label="shrug">🤷‍♂️</span>
+          </p>
+          <p>
+            I am fluent in <span className="purple italic">C++, Javascript and Python.</span>
+          </p>
+          <p>
+            My field of Interest's are building new <span className="purple italic">Web Technologies, Web Application </span>
+          </p>
+          <p>
+            Whenever possible, I also apply my passion for developing products with<span className="purple italic">Modern Javascript Library and Frameworks</span> like <span className="purple italic">React.js and Next.js</span>
+          </p>
+
+          <h2>FIND ME ON</h2>
+          <p>Feel free to <span className="purple">connect</span> with me</p>
+          <div className="social-icons">
+            <a href="https://github.com/kartik-kumar-pandey/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <img src="/icons/github.png" alt="GitHub" />
+            </a>
+            <a href="https://www.linkedin.com/in/kartik-kumar-pandey-bhka2004/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <img src="/icons/linkedin.png" alt="LinkedIn" />
+            </a>
+          </div>
+        </div>
         <footer className="footer">
           <p>© 2025 Kartik Kumar Pandey. All rights reserved.</p>
         </footer>
