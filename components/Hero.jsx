@@ -57,7 +57,7 @@ const Hero = () => {
           With experience in full-stack development, I'm focused on creating impactful digital solutions and always open to exciting opportunities.
         </p>
         <footer className="footer">
-          <p>© 2024 Kartik Kumar Pandey. All rights reserved.</p>
+          <p>© 2025 Kartik Kumar Pandey. All rights reserved.</p>
         </footer>
       </section>
     </>
