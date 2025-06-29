@@ -40,7 +40,7 @@ const Hero = () => {
       <section id="hero" className="hero">
         <div className="hero-text">
           <h1>Hi There! <span role="img" aria-label="waving hand" className="waving-hand">👋🏻</span></h1>
-          <h2>I'M KARTIK KUMAR PANDEY</h2>
+          <h2>I'M <span className="kartik-name-text">KARTIK KUMAR PANDEY</span></h2>
           <h3>{displayedText}<span className="cursor">|</span></h3>
         </div>
 

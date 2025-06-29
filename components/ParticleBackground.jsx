@@ -30,13 +30,19 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
     }
 
     function getRandomSpeed() {
-      return [randomNumFrom(-0.3, 0.3), randomNumFrom(-0.3, 0.3)];
+      // Ensure non-zero speed
+      let vx = 0, vy = 0;
+      while (vx === 0 && vy === 0) {
+        vx = randomNumFrom(-0.1, 0.1);
+        vy = randomNumFrom(-0.1, 0.1);
+      }
+      return [vx, vy];
     }
 
     function getRandomBall() {
       const [vx, vy] = getRandomSpeed();
-      const x = randomNumFrom(0, can_w);
-      const y = randomNumFrom(0, can_h);
+      const x = randomNumFrom(R, can_w - R);
+      const y = randomNumFrom(R, can_h - R);
       return { x, y, vx, vy, r: R, alpha: 1 };
     }
 
@@ -52,17 +58,32 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
     }
 
     function updateBalls() {
-      const newBalls = [];
-      
       // Get current mouse state from ref
       const currentMouse = mouseRef.current;
       actual_mouse.x = currentMouse.x;
       actual_mouse.y = currentMouse.y;
       mouse_in = currentMouse.in;
-      
+
       balls.forEach(b => {
         b.x += b.vx;
         b.y += b.vy;
+
+        // Bounce off left/right
+        if (b.x - R <= 0 && b.vx < 0) {
+          b.x = R;
+          b.vx = Math.max(-0.1, Math.min(0.1, -b.vx * 0.95));
+        } else if (b.x + R >= can_w && b.vx > 0) {
+          b.x = can_w - R;
+          b.vx = Math.max(-0.1, Math.min(0.1, -b.vx * 0.95));
+        }
+        // Bounce off top/bottom
+        if (b.y - R <= 0 && b.vy < 0) {
+          b.y = R;
+          b.vy = Math.max(-0.1, Math.min(0.1, -b.vy * 0.95));
+        } else if (b.y + R >= can_h && b.vy > 0) {
+          b.y = can_h - R;
+          b.vy = Math.max(-0.1, Math.min(0.1, -b.vy * 0.95));
+        }
 
         const dx = b.x - mouse_ball.x;
         const dy = b.y - mouse_ball.y;
@@ -73,13 +94,7 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
           b.vx += Math.cos(angle) * 0.4;
           b.vy += Math.sin(angle) * 0.4;
         }
-
-        if (b.x > -50 && b.x < can_w + 50 && b.y > -50 && b.y < can_h + 50) {
-          newBalls.push(b);
-        }
       });
-      
-      balls = newBalls;
 
       mouse_ball.x += (actual_mouse.x - mouse_ball.x) * customPointerLag;
       mouse_ball.y += (actual_mouse.y - mouse_ball.y) * customPointerLag;
@@ -129,11 +144,11 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
       renderLines();
       if (mouse_in) renderMousePointer();
       updateBalls();
-      if (balls.length < BALL_NUM) balls.push(getRandomBall());
       requestAnimationFrame(render);
     }
 
     function initBalls(num) {
+      balls = [];
       for (let i = 0; i < num; i++) balls.push(getRandomBall());
     }
 
@@ -144,7 +159,10 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
       can_h = canvas.height;
     }
 
-    window.addEventListener('resize', initCanvas);
+    window.addEventListener('resize', () => {
+      initCanvas();
+      initBalls(BALL_NUM);
+    });
 
     function goMovie() {
       initCanvas();
