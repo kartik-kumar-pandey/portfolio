@@ -38,9 +38,14 @@ const Home = () => {
   return (
     <>
       <Navbar onSectionChange={setActiveSection} activeSection={activeSection} scrolled={scrolled} />
-      <main>
-        {renderSection()}
-      </main>
+      <div className="main-content">
+        <main>
+          {renderSection()}
+        </main>
+      </div>
+      <footer className="footer">
+        <p>© 2025 Kartik Kumar Pandey. All rights reserved.</p>
+      </footer>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import '../styles/style.css';
 import React, { useState, useEffect } from 'react';
 import ParticleBackground from '../components/ParticleBackground';
+import StarfieldBackground from '../components/StarfieldBackground';
 import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
@@ -38,6 +39,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <StarfieldBackground />
       <ParticleBackground mousePosition={mousePosition} mouseInWindow={mouseInWindow} />
       <Component {...pageProps} />
     </>

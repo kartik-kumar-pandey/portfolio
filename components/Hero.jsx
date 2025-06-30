@@ -76,9 +76,6 @@ const Hero = () => {
             </a>
           </div>
         </div>
-        <footer className="footer">
-          <p>© 2025 Kartik Kumar Pandey. All rights reserved.</p>
-        </footer>
       </section>
     </>
   );

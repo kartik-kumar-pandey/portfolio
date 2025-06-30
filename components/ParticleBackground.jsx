@@ -11,14 +11,22 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
     let can_w = canvas.width = window.innerWidth;
     let can_h = canvas.height = window.innerHeight;
 
-    const BALL_NUM = 30;
-    const R = 2;
-    const dis_limit = 180;
-    const MAX_CONNECTIONS = 4;
-    const link_line_width = 0.6;
-    const repel_radius = 100;
-    const ball_color = { r: 0, g: 0, b: 0 };
+    const BALL_NUM = 40;
+    const MIN_R = 1;
+    const MAX_R = 3;
+    const dis_limit = 200;
+    const MAX_CONNECTIONS = 3;
+    const link_line_width = 0.8;
+    const repel_radius = 120;
     const customPointerLag = 0.1;
+
+    // Galaxy theme colors
+    const particleColors = [
+      { r: 147, g: 197, b: 253 },  // Light blue
+      { r: 167, g: 139, b: 250 },  // Purple
+      { r: 236, g: 172, b: 251 },  // Pink
+      { r: 255, g: 255, b: 255 },  // White
+    ];
 
     let balls = [];
     let mouse_in = false;
@@ -30,35 +38,51 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
     }
 
     function getRandomSpeed() {
-      // Ensure non-zero speed
       let vx = 0, vy = 0;
       while (vx === 0 && vy === 0) {
-        vx = randomNumFrom(-0.1, 0.1);
-        vy = randomNumFrom(-0.1, 0.1);
+        vx = randomNumFrom(-0.15, 0.15);
+        vy = randomNumFrom(-0.15, 0.15);
       }
       return [vx, vy];
     }
 
+    function getRandomColor() {
+      return particleColors[Math.floor(Math.random() * particleColors.length)];
+    }
+
     function getRandomBall() {
       const [vx, vy] = getRandomSpeed();
-      const x = randomNumFrom(R, can_w - R);
-      const y = randomNumFrom(R, can_h - R);
-      return { x, y, vx, vy, r: R, alpha: 1 };
+      const x = randomNumFrom(MAX_R, can_w - MAX_R);
+      const y = randomNumFrom(MAX_R, can_h - MAX_R);
+      const r = randomNumFrom(MIN_R, MAX_R);
+      const color = getRandomColor();
+      return { x, y, vx, vy, r, color, alpha: 1 };
     }
 
     function renderBalls() {
       balls.forEach(b => {
         if (!b.type) {
-          ctx.fillStyle = `rgb(${ball_color.r},${ball_color.g},${ball_color.b})`;
+          // Create glowing effect
+          const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r * 2);
+          gradient.addColorStop(0, `rgba(${b.color.r},${b.color.g},${b.color.b},0.8)`);
+          gradient.addColorStop(0.5, `rgba(${b.color.r},${b.color.g},${b.color.b},0.3)`);
+          gradient.addColorStop(1, 'rgba(0,0,0,0)');
+          
+          ctx.fillStyle = gradient;
           ctx.beginPath();
-          ctx.arc(b.x, b.y, R, 0, Math.PI * 2);
+          ctx.arc(b.x, b.y, b.r * 2, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Core of the particle
+          ctx.fillStyle = `rgb(${b.color.r},${b.color.g},${b.color.b})`;
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
           ctx.fill();
         }
       });
     }
 
     function updateBalls() {
-      // Get current mouse state from ref
       const currentMouse = mouseRef.current;
       actual_mouse.x = currentMouse.x;
       actual_mouse.y = currentMouse.y;
@@ -68,31 +92,42 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
         b.x += b.vx;
         b.y += b.vy;
 
-        // Bounce off left/right
-        if (b.x - R <= 0 && b.vx < 0) {
-          b.x = R;
-          b.vx = Math.max(-0.1, Math.min(0.1, -b.vx * 0.95));
-        } else if (b.x + R >= can_w && b.vx > 0) {
-          b.x = can_w - R;
-          b.vx = Math.max(-0.1, Math.min(0.1, -b.vx * 0.95));
+        // Add slight random movement for more organic feel
+        b.vx += (Math.random() - 0.5) * 0.01;
+        b.vy += (Math.random() - 0.5) * 0.01;
+
+        // Limit max speed
+        b.vx = Math.max(-0.5, Math.min(0.5, b.vx));
+        b.vy = Math.max(-0.5, Math.min(0.5, b.vy));
+
+        // Bounce off edges with damping
+        if (b.x - b.r <= 0 && b.vx < 0) {
+          b.x = b.r;
+          b.vx = -b.vx * 0.8;
+        } else if (b.x + b.r >= can_w && b.vx > 0) {
+          b.x = can_w - b.r;
+          b.vx = -b.vx * 0.8;
         }
-        // Bounce off top/bottom
-        if (b.y - R <= 0 && b.vy < 0) {
-          b.y = R;
-          b.vy = Math.max(-0.1, Math.min(0.1, -b.vy * 0.95));
-        } else if (b.y + R >= can_h && b.vy > 0) {
-          b.y = can_h - R;
-          b.vy = Math.max(-0.1, Math.min(0.1, -b.vy * 0.95));
+        if (b.y - b.r <= 0 && b.vy < 0) {
+          b.y = b.r;
+          b.vy = -b.vy * 0.8;
+        } else if (b.y + b.r >= can_h && b.vy > 0) {
+          b.y = can_h - b.r;
+          b.vy = -b.vy * 0.8;
         }
 
-        const dx = b.x - mouse_ball.x;
-        const dy = b.y - mouse_ball.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (mouse_in && dist < repel_radius && !b.type) {
-          const angle = Math.atan2(dy, dx);
-          b.vx += Math.cos(angle) * 0.4;
-          b.vy += Math.sin(angle) * 0.4;
+        // Mouse repulsion
+        if (mouse_in && !b.type) {
+          const dx = b.x - mouse_ball.x;
+          const dy = b.y - mouse_ball.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < repel_radius) {
+            const force = (1 - dist / repel_radius) * 0.5;
+            const angle = Math.atan2(dy, dx);
+            b.vx += Math.cos(angle) * force;
+            b.vy += Math.sin(angle) * force;
+          }
         }
       });
 
@@ -107,6 +142,7 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
     }
 
     function renderLines() {
+      ctx.globalCompositeOperation = 'lighter';
       for (let i = 0; i < balls.length; i++) {
         let connections = 0;
         for (let j = 0; j < balls.length; j++) {
@@ -118,8 +154,16 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
             const distToMouse2 = getDistance(balls[j], mouse_ball);
             if (distToMouse1 < repel_radius || distToMouse2 < repel_radius) continue;
 
-            const alpha = 1 - dist / dis_limit;
-            ctx.strokeStyle = `rgba(0,0,0,${alpha * 0.15})`;
+            const alpha = (1 - dist / dis_limit) * 0.2;
+            const gradient = ctx.createLinearGradient(
+              balls[i].x, balls[i].y,
+              balls[j].x, balls[j].y
+            );
+            
+            gradient.addColorStop(0, `rgba(${balls[i].color.r},${balls[i].color.g},${balls[i].color.b},${alpha})`);
+            gradient.addColorStop(1, `rgba(${balls[j].color.r},${balls[j].color.g},${balls[j].color.b},${alpha})`);
+            
+            ctx.strokeStyle = gradient;
             ctx.lineWidth = link_line_width;
             ctx.beginPath();
             ctx.moveTo(balls[i].x, balls[i].y);
@@ -129,12 +173,20 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
           }
         }
       }
+      ctx.globalCompositeOperation = 'source-over';
     }
 
     function renderMousePointer() {
+      const gradient = ctx.createRadialGradient(
+        mouse_ball.x, mouse_ball.y, 0,
+        mouse_ball.x, mouse_ball.y, 15
+      );
+      gradient.addColorStop(0, 'rgba(167, 139, 250, 0.4)');
+      gradient.addColorStop(1, 'rgba(167, 139, 250, 0)');
+      
       ctx.beginPath();
-      ctx.arc(mouse_ball.x, mouse_ball.y, 10, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(95, 93, 93, 0.31)';
+      ctx.arc(mouse_ball.x, mouse_ball.y, 15, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
       ctx.fill();
     }
 
@@ -175,9 +227,8 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
     return () => {
       window.removeEventListener('resize', initCanvas);
     };
-  }, []); // Empty dependency array to run only once
+  }, []);
 
-  // Update mouse ref when props change
   useEffect(() => {
     if (mousePosition && mouseInWindow) {
       mouseRef.current = {
@@ -203,10 +254,9 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
         top: 0,
         left: 0,
         zIndex: -1,
-        width: '100vw',
-        height: '100vh',
         pointerEvents: 'none',
-        backgroundColor: '#fff',
+        width: '100%',
+        height: '100%'
       }}
     />
   );
