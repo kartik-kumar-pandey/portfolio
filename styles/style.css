@@ -569,6 +569,8 @@ html {
   cursor: pointer;
   padding: 5px;
   z-index: 1001;
+  background: none;
+  box-shadow: none;
 }
 .hamburger-line {
   width: 25px;
@@ -577,10 +579,13 @@ html {
   margin: 3px 0;
   transition: 0.3s;
   border-radius: 2px;
+  box-shadow: none;
 }
-.hamburger-line.open:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
-.hamburger-line.open:nth-child(2) { opacity: 0; }
-.hamburger-line.open:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+.hamburger:hover .hamburger-line,
+.hamburger-line.open {
+  background-color: #7ecbff;
+  box-shadow: 0 0 8px #7ecbff, 0 0 2px #fff;
+}
 
 /* Center brand when menu open */
 .navbar-brand.navbar-brand--centered {
@@ -606,14 +611,14 @@ html {
     left: -100% !important;
     width: 100% !important;
     height: calc(100vh - 50px) !important;
-    background: rgba(20, 30, 50, 0.97);
+    background: #181c2a !important;
+    box-shadow: none !important;
+    border-right: none !important;
     backdrop-filter: blur(8px);
-    box-shadow: 0 0 32px 8px #1a2980cc, 0 0 64px 16px #7ecbff33;
-    border-right: 2px solid #7ecbff44;
     flex-direction: column !important;
     justify-content: flex-start !important;
     align-items: center !important;
-    padding-top: 2.5rem !important;
+    padding-top: 1rem !important;
     transition: left 0.3s ease !important;
     transform: none !important;
     z-index: 1100 !important;
