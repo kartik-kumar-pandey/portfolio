@@ -727,131 +727,133 @@ a:hover, .resume-download:hover, .mobile-resume-download:hover {
 
 /* Contact Section Styles */
 .contact {
-  padding: 6rem 1rem;
+  padding: 5rem 0.5rem;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60vw;
+  width: 100vw;
   box-sizing: border-box;
+  background: none;
 }
 
 .contact-container {
   width: 100%;
-  max-width: 420px;
+  max-width: 410px;
   padding: 2rem 1.2rem;
-  background: rgba(13, 12, 34, 0.7);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(147, 197, 253, 0.1);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  background: rgba(20, 30, 50, 0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1.5px solid rgba(147, 197, 253, 0.13);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.18);
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .contact-title {
-  font-size: 2.5rem;
+  font-size: 2.1rem;
   margin-bottom: 0.5rem;
   text-align: center;
-  background: linear-gradient(120deg, #93c5fd, #a78bfa, #ec4899);
+  background: linear-gradient(120deg, #bcd2ff, #f8fafc 80%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: titleGlow 3s ease-in-out infinite alternate;
+  text-shadow: 0 0 12px #bcd2ff44;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .contact-subtitle {
   text-align: center;
-  color: #94a3b8;
-  margin-bottom: 2.5rem;
-  font-size: 1.1rem;
+  color: #bcd2ff;
+  margin-bottom: 2rem;
+  font-size: 1.08rem;
+  font-weight: 400;
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.1rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .form-group label {
   color: #e2e8f0;
-  font-size: 0.95rem;
-  margin-left: 0.5rem;
+  font-size: 1rem;
+  margin: 0 0 0.2rem 0;
+  font-weight: 500;
+  padding: 0;
 }
 
 .form-input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid rgba(147, 197, 253, 0.2);
-  border-radius: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.8rem 1rem;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1.5px solid rgba(147, 197, 253, 0.18);
+  border-radius: 12px;
   color: #e2e8f0;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: 1.08rem;
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .form-input:focus {
   outline: none;
-  border-color: rgba(147, 197, 253, 0.5);
-  box-shadow: 0 0 0 2px rgba(147, 197, 253, 0.2);
-  background: rgba(30, 41, 59, 0.7);
+  border-color: #bcd2ff;
+  box-shadow: 0 0 0 2px #bcd2ff33;
+  background: rgba(30, 41, 59, 0.85);
 }
 
 .form-input::placeholder {
-  color: #64748b;
+  color: #bcd2ff99;
 }
 
 textarea.form-input {
   resize: vertical;
-  min-height: 120px;
+  min-height: 100px;
 }
 
 .submit-button {
-  margin-top: 1rem;
-  padding: 0.875rem 2rem;
-  background: linear-gradient(135deg, #93c5fd 0%, #a78bfa 50%, #ec4899 100%);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.submit-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: 0.5s;
-}
-
-.submit-button:hover::before {
-  left: 100%;
+  box-sizing: border-box;
+  margin: 1.1rem 0 0 0;
+  padding: 0.9rem 1rem;
+  background: linear-gradient(120deg, #bcd2ff 0%, #f8fafc 100%);
+  border: none;
+  border-radius: 12px;
+  color: #222b3a;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 12px #bcd2ff22;
+  letter-spacing: 0.01em;
 }
 
 .submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(147, 197, 253, 0.4);
+  background: linear-gradient(120deg, #f8fafc 0%, #bcd2ff 100%);
+  color: #1a2233;
+  box-shadow: 0 4px 24px #bcd2ff44;
+  transform: translateY(-2px) scale(1.03);
 }
 
 .submit-button:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .submit-button.submitting {
@@ -860,61 +862,45 @@ textarea.form-input {
 }
 
 .form-status {
-  margin-top: 1.5rem;
-  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 1.2rem 0 0 0;
+  padding: 0.8rem;
   border-radius: 8px;
   text-align: center;
+  font-size: 1rem;
   animation: fadeIn 0.3s ease-out;
 }
 
 .form-status.success {
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.13);
   color: #4ade80;
 }
 
 .form-status.error {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.13);
   color: #f87171;
 }
 
-@keyframes titleGlow {
-  0% {
-    text-shadow: 0 0 10px rgba(147, 197, 253, 0.5),
-                 0 0 20px rgba(167, 139, 250, 0.3);
-  }
-  100% {
-    text-shadow: 0 0 20px rgba(147, 197, 253, 0.8),
-                 0 0 30px rgba(167, 139, 250, 0.5),
-                 0 0 40px rgba(236, 72, 153, 0.3);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .contact-container {
-    padding: 1.2rem 0.5rem;
-    max-width: 98vw;
+    max-width: 99vw;
+    padding: 1rem 0.7rem;
   }
-
   .contact-title {
-    font-size: 2rem;
+    font-size: 1.3rem;
   }
-
   .contact-subtitle {
+    font-size: 0.98rem;
+  }
+  .form-input, .submit-button {
     font-size: 1rem;
+    padding: 0.7rem 0.7rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
   }
 }
 
