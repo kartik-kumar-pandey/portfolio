@@ -11,6 +11,8 @@
     "next": "latest",
     "nodemailer": "^7.0.4",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "three": "^0.178.0",
+    "vanta": "^0.5.24"
   }
 }
