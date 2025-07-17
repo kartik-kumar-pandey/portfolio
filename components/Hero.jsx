@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const roles = ['STUDENT', 'COMPUTER SCIENCE ENGINEER'];
+const roles = ['STUDENT', 'ASPIRING SOFTWARE ENGINEER'];
 
 const Hero = () => {
   const [displayedText, setDisplayedText] = useState('');
