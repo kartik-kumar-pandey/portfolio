@@ -72,7 +72,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="form-input"
+              className="form-input cursor-target"
               placeholder="Your name"
             />
           </div>
@@ -86,7 +86,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="form-input"
+              className="form-input cursor-target"
               placeholder="your.email@example.com"
             />
           </div>
@@ -99,7 +99,7 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               required
-              className="form-input"
+              className="form-input cursor-target"
               placeholder="Your message here..."
               rows="5"
             ></textarea>
@@ -107,7 +107,7 @@ const Contact = () => {
 
           <button 
             type="submit" 
-            className={`submit-button ${isSubmitting ? 'submitting' : ''}`}
+            className={`submit-button cursor-target ${isSubmitting ? 'submitting' : ''}`}
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Sending...' : 'Send Message'}

@@ -3,15 +3,13 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Projects from '../components/Projects';
 import Skills from '../components/Skills';
-import Experience from '../components/Experience';
+import Timeline from '../components/Timeline';
 import Contact from '../components/Contact';
-import VantaNetBackground from '../components/VantaNetBackground';
-import VantaCloudsBackground from '../components/VantaCloudsBackground';
+import TargetCursor from '../components/TargetCursor';
 
 const Home = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [scrolled, setScrolled] = useState(false);
-  const [background, setBackground] = useState('none'); // 'none', 'net', 'clouds'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,16 +19,6 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleBackground = () => {
-    if (background === 'none') {
-      setBackground('net');
-    } else if (background === 'net') {
-      setBackground('clouds');
-    } else {
-      setBackground('none');
-    }
-  };
-
   const renderSection = () => {
     switch (activeSection) {
       case 'hero':
@@ -39,8 +27,8 @@ const Home = () => {
         return <Projects />;
       case 'skills':
         return <Skills />;
-      case 'experience':
-        return <Experience />;
+      case 'timeline':
+        return <Timeline />;
       case 'contact':
         return <Contact />;
       default:
@@ -50,8 +38,11 @@ const Home = () => {
 
   return (
     <>
-      {background === 'net' && <VantaNetBackground />}
-      {background === 'clouds' && <VantaCloudsBackground />}
+      <TargetCursor 
+        targetSelector=".cursor-target"
+        spinDuration={2}
+        hideDefaultCursor={true}
+      />
       <Navbar onSectionChange={setActiveSection} activeSection={activeSection} scrolled={scrolled} />
       <div className="main-content">
         <main>
@@ -59,13 +50,6 @@ const Home = () => {
         </main>
       </div>
       <footer className="footer">
-        <button
-          onClick={toggleBackground}
-          className="toggle-background-button"
-          aria-label="Toggle Background"
-        >
-          Toggle Background
-        </button>
         <p>© 2025 Kartik Kumar Pandey. All rights reserved.</p>
       </footer>
     </>

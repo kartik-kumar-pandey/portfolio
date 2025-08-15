@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "latest",
+    "gsap": "^3.13.0",
     "next": "latest",
     "nodemailer": "^7.0.4",
+    "ogl": "^1.0.11",
     "react": "latest",
-    "react-dom": "latest",
-    "three": "^0.178.0",
-    "vanta": "^0.5.24"
+    "react-dom": "latest"
   }
 }

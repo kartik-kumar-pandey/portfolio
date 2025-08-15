@@ -181,8 +181,8 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
         mouse_ball.x, mouse_ball.y, 0,
         mouse_ball.x, mouse_ball.y, 15
       );
-      gradient.addColorStop(0, 'rgba(167, 139, 250, 0.4)');
-      gradient.addColorStop(1, 'rgba(167, 139, 250, 0)');
+      gradient.addColorStop(0, 'rgba(139, 92, 246, 0.4)');
+      gradient.addColorStop(1, 'rgba(139, 92, 246, 0)');
       
       ctx.beginPath();
       ctx.arc(mouse_ball.x, mouse_ball.y, 15, 0, Math.PI * 2);

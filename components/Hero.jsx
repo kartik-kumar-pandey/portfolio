@@ -45,25 +45,27 @@ const Hero = () => {
         </div>
 
         <div className="hero-image">
-          <img src="/hero-image.png" alt="Kartik's Hero Image" />
+          <img src="/hero.webp" alt="Kartik Kumar Pandey" />
         </div>
       </section>
 
       <section id="introduce" className="introduce">
-        <div className="introduce-text">
-          <h2>LET ME <span className="highlight">INTRODUCE</span> MYSELF</h2>
-          <p>
-            I fell in love with programming and I have at least learnt something, I think... <span role="img" aria-label="shrug">🤷‍♂️</span>
-          </p>
-          <p>
-            I am fluent in <span className="purple italic">C++, Javascript and Python.</span>
-          </p>
-          <p>
-            My field of Interest's are building new <span className="purple italic">Web Technologies, Web Application </span>
-          </p>
-          <p>
-            Whenever possible, I also apply my passion for developing products with<span className="purple italic">Modern Javascript Library and Frameworks</span> like <span className="purple italic">React.js and Next.js</span>
-          </p>
+      <div className="introduce-text">
+        <h2>LET ME <span className="highlight">INTRODUCE</span> MYSELF</h2>
+        <p>
+          I am currently pursuing a <span className="purple italic">Bachelor’s degree in Computer Science</span> with a specialization in <span className="purple italic">Artificial Intelligence</span>. Over time, I’ve developed a deep passion for programming and technology.
+        </p>
+        <p>
+          I am proficient in <span className="purple italic">C++, Java, and Python</span>, constantly improving my problem-solving and algorithmic thinking skills.
+        </p>
+        <p>
+          My areas of interest include creating innovative <span className="purple italic">Web Technologies</span> and <span className="purple italic">Web Applications</span>.
+        </p>
+        <p>
+          I enjoy building impactful products using <span className="purple italic">modern JavaScript libraries and frameworks</span> like <span className="purple italic">React.js</span> and <span className="purple italic">Next.js</span>.
+        </p>
+
+
 
           <h2>FIND ME ON</h2>
           <p>Feel free to <span className="purple">connect</span> with me</p>
