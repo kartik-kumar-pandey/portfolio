@@ -78,6 +78,46 @@ const TargetCursor = ({
     const moveHandler = (e) => moveCursor(e.clientX, e.clientY);
     window.addEventListener("mousemove", moveHandler);
 
+    // Touch support: follow finger and scale on press
+    const getTouchPoint = (ev) => {
+      if (!ev.touches || ev.touches.length === 0) return null;
+      const t = ev.touches[0];
+      return { x: t.clientX, y: t.clientY };
+    };
+
+    const touchStartHandler = (ev) => {
+      const pt = getTouchPoint(ev);
+      if (!pt) return;
+      moveCursor(pt.x, pt.y);
+      if (dotRef.current && cursorRef.current) {
+        gsap.to(dotRef.current, { scale: 0.7, duration: 0.2 });
+        gsap.to(cursorRef.current, { scale: 0.9, duration: 0.2 });
+      }
+    };
+
+    let touchMoveRaf = null;
+    const touchMoveHandler = (ev) => {
+      if (touchMoveRaf) return;
+      const pt = getTouchPoint(ev);
+      if (!pt) return;
+      touchMoveRaf = requestAnimationFrame(() => {
+        moveCursor(pt.x, pt.y);
+        touchMoveRaf = null;
+      });
+    };
+
+    const touchEndHandler = () => {
+      if (dotRef.current && cursorRef.current) {
+        gsap.to(dotRef.current, { scale: 1, duration: 0.2 });
+        gsap.to(cursorRef.current, { scale: 1, duration: 0.2 });
+      }
+    };
+
+    window.addEventListener("touchstart", touchStartHandler, { passive: true });
+    window.addEventListener("touchmove", touchMoveHandler, { passive: true });
+    window.addEventListener("touchend", touchEndHandler, { passive: true });
+    window.addEventListener("touchcancel", touchEndHandler, { passive: true });
+
     const scrollHandler = () => {
       if (!activeTarget || !cursorRef.current) return;
       
@@ -302,6 +342,10 @@ const TargetCursor = ({
 
     return () => {
       window.removeEventListener("mousemove", moveHandler);
+      window.removeEventListener("touchstart", touchStartHandler);
+      window.removeEventListener("touchmove", touchMoveHandler);
+      window.removeEventListener("touchend", touchEndHandler);
+      window.removeEventListener("touchcancel", touchEndHandler);
       window.removeEventListener("mouseover", enterHandler);
       window.removeEventListener("scroll", scrollHandler);
 
