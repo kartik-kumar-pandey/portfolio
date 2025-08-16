@@ -2,22 +2,22 @@ import React, { useState, useMemo } from 'react';
 
 const skillCategories = {
   'Programming Languages': [
-    { name: 'C++', proficiency: 90, icon: '/icons/cpp.webp' },
-    { name: 'JavaScript', proficiency: 85, icon: '/icons/javascript.webp' },
-    { name: 'Python', proficiency: 80, icon: '/icons/python.webp' },
-    { name: 'Java', proficiency: 75, icon: '/icons/java.png' },
+    { name: 'C++', proficiency: 80, icon: '/icons/cpp.webp' },
+    { name: 'JavaScript', proficiency: 75, icon: '/icons/javascript.webp' },
+    { name: 'Python', proficiency: 60, icon: '/icons/python.webp' },
+    { name: 'Java', proficiency: 65, icon: '/icons/java.png' },
     { name: 'C', proficiency: 70, icon: '/icons/c.png' }
   ],
   'Web Technologies': [
-    { name: 'React.js', proficiency: 88, icon: '/icons/react.webp' },
-    { name: 'Next.js', proficiency: 85, icon: '/icons/nextjs.webp' },
-    { name: 'HTML', proficiency: 90, icon: '/icons/html.webp' },
-    { name: 'CSS', proficiency: 85, icon: '/icons/css.webp' },
-    { name: 'Node.js', proficiency: 80, icon: '/icons/node-js.webp' }
+    { name: 'React.js', proficiency: 72, icon: '/icons/react.webp' },
+    { name: 'Next.js', proficiency: 65, icon: '/icons/nextjs.webp' },
+    { name: 'HTML', proficiency: 80, icon: '/icons/html.webp' },
+    { name: 'CSS', proficiency: 75, icon: '/icons/css.webp' },
+    { name: 'Node.js', proficiency: 40, icon: '/icons/node-js.webp' }
   ],
   'Tools & Platforms': [
-    { name: 'Git', proficiency: 85, icon: '/icons/git.webp' },
-    { name: 'GitHub', proficiency: 90, icon: '/icons/github.png' },
+    { name: 'Git', proficiency: 75, icon: '/icons/git.webp' },
+    { name: 'GitHub', proficiency: 80, icon: '/icons/github.png' },
     { name: 'Supabase', proficiency: 75, icon: '/icons/supabase.webp' }
   ]
 };
