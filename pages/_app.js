@@ -1,8 +1,8 @@
 import '../styles/style.css';
+import '../components/ProfileCard.css';
 import React, { useState, useEffect } from 'react';
 import ParticleBackground from '../components/ParticleBackground';
 import DarkVeil from '../components/DarkVeil';
-import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -69,12 +69,6 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://use.typekit.net/asq5ulw.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-      </Head>
-      
       <DarkVeil 
         hueShift={0}
         noiseIntensity={0.002}

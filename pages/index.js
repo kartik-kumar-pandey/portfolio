@@ -22,7 +22,7 @@ const Home = () => {
   const renderSection = () => {
     switch (activeSection) {
       case 'hero':
-        return <Hero />;
+        return <Hero onSectionChange={setActiveSection} />;
       case 'projects':
         return <Projects />;
       case 'skills':
@@ -32,7 +32,7 @@ const Home = () => {
       case 'contact':
         return <Contact />;
       default:
-        return <Hero />;
+        return <Hero onSectionChange={setActiveSection} />;
     }
   };
 
