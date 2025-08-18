@@ -21,21 +21,31 @@ export default async function handler(req, res) {
 
     // 2. Send email using Gmail (Nodemailer)
     try {
-      console.log('Attempting to send email...');
-      
+      const gmailUser = process.env.GMAIL_USER || '2k23.csai2313425@gmail.com';
+      const gmailPass = process.env.GMAIL_PASS;
+      const emailTo = process.env.CONTACT_TO || gmailUser;
+
+      if (!gmailPass) {
+        return res.status(500).json({
+          error: 'Email service not configured',
+          details: 'Missing GMAIL_PASS environment variable.'
+        });
+      }
+
       const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: '2k23.csai2313425@gmail.com',
-          pass: process.env.GMAIL_PASS, // Still need app password from env
-        },
-        secure: true,
+        host: 'smtp.gmail.com',
         port: 465,
+        secure: true,
+        auth: {
+          user: gmailUser,
+          pass: gmailPass,
+        },
       });
 
       const mailOptions = {
-        from: '2k23.csai2313425@gmail.com',
-        to: '2k23.csai2313425@gmail.com', // Direct hardcoded email
+        from: `Portfolio Contact <${gmailUser}>`,
+        to: emailTo,
+        replyTo: email,
         subject: `New Contact Form Submission from ${name}`,
         html: `
           <h2>New Contact Form Submission</h2>
@@ -49,15 +59,8 @@ export default async function handler(req, res) {
         text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       };
 
-      console.log('Mail options:', {
-        from: mailOptions.from,
-        to: mailOptions.to,
-        subject: mailOptions.subject
-      });
-      
       const info = await transporter.sendMail(mailOptions);
-      console.log('Email sent successfully:', info.messageId);
-      
+
       return res.status(200).json({ 
         message: 'Contact information saved and email sent successfully', 
         data,
@@ -66,18 +69,9 @@ export default async function handler(req, res) {
       
     } catch (mailError) {
       console.error('Error sending email:', mailError);
-      
-      // Return success for Supabase save but include email error
-      return res.status(200).json({
-        message: 'Contact information saved successfully, but failed to send email notification.',
-        data,
-        emailError: mailError.message,
-        emailErrorDetails: {
-          code: mailError.code,
-          command: mailError.command,
-          response: mailError.response,
-          responseCode: mailError.responseCode
-        }
+      return res.status(500).json({
+        error: 'Failed to send email notification',
+        details: mailError.message
       });
     }
   } else if (req.method === 'GET') {
