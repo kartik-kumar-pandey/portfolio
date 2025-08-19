@@ -253,7 +253,7 @@ const ParticleBackground = ({ mousePosition, mouseInWindow }) => {
         position: 'fixed',
         top: 0,
         left: 0,
-        zIndex: -1,
+        zIndex: -2,
         pointerEvents: 'none',
         width: '100%',
         height: '100%'

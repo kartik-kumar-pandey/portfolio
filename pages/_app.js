@@ -3,6 +3,7 @@ import '../components/ProfileCard.css';
 import React, { useState, useEffect } from 'react';
 import ParticleBackground from '../components/ParticleBackground';
 import DarkVeil from '../components/DarkVeil';
+import TargetCursor from '../components/TargetCursor';
 
 function MyApp({ Component, pageProps }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -77,6 +78,11 @@ function MyApp({ Component, pageProps }) {
         scanlineFrequency={0.15}
         warpAmount={0.25}
         resolutionScale={1}
+      />
+      <TargetCursor 
+        targetSelector=".cursor-target"
+        spinDuration={2}
+        hideDefaultCursor={true}
       />
       <ParticleBackground mousePosition={mousePosition} mouseInWindow={mouseInWindow} />
       <Component {...pageProps} />

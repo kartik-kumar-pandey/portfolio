@@ -38,11 +38,6 @@ const Home = () => {
 
   return (
     <>
-      <TargetCursor 
-        targetSelector=".cursor-target"
-        spinDuration={2}
-        hideDefaultCursor={true}
-      />
       <Navbar onSectionChange={setActiveSection} activeSection={activeSection} scrolled={scrolled} />
       <div className="main-content">
         <main>
