@@ -271,6 +271,33 @@ main {
   border-color: rgba(139, 92, 246, 0.3);
 }
 
+/* Admin CTA (outlined, subtle glow) */
+.admin-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--text-primary);
+  border: 2px solid rgba(139, 92, 246, 0.45);
+  background: rgba(139, 92, 246, 0.08);
+  box-shadow: 0 0 0 transparent, var(--shadow-sm);
+  transition: all var(--transition-bounce);
+}
+
+.admin-cta:hover {
+  transform: translateY(-2px);
+  background: rgba(139, 92, 246, 0.16);
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.25);
+}
+
+.admin-cta:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
 /* Hamburger Menu */
 .hamburger {
   display: none;
@@ -941,6 +968,20 @@ textarea.form-input {
     max-width: 200px;
     text-align: center;
   }
+
+  /* Admin mobile tweaks */
+  .admin-header { flex-direction: column; align-items: stretch; gap: var(--spacing-md); }
+  .admin-controls { flex-wrap: wrap; justify-content: flex-start; }
+  .admin-signout { width: 100%; }
+  .table th, .table td { padding: 10px; }
+  .table thead { display: none; }
+  .table tbody tr { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 12px 0; }
+  .table tbody tr td { border-bottom: none; }
+}
+
+/* Hide menu Admin item on desktop; keep CTA button */
+@media (min-width: 769px) {
+  .nav-admin { display: none; }
 }
 
 @media (max-width: 480px) {

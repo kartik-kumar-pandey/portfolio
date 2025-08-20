@@ -55,8 +55,10 @@ const Navbar = ({ onSectionChange, activeSection, scrolled }) => {
           <li><a href="#skills" onClick={(e) => handleClick(e, 'skills')} className={`cursor-target ${activeSection === 'skills' ? 'active' : ''}`}>Skills</a></li>
           <li><a href="#timeline" onClick={(e) => handleClick(e, 'timeline')} className={`cursor-target ${activeSection === 'timeline' ? 'active' : ''}`}>Timeline</a></li>
           <li><a href="#contact" onClick={(e) => handleClick(e, 'contact')} className={`cursor-target ${activeSection === 'contact' ? 'active' : ''}`}>Contact</a></li>
+          <li className="nav-admin"><a href="/admin" className="cursor-target">Admin</a></li>
         </ul>
         <a href="/kartik kumar pandey.pdf" download className="resume-download cursor-target">Download Resume</a>
+        <a href="/admin" className="admin-cta cursor-target" style={{ marginLeft: '12px' }}>Admin</a>
       </div>
     </nav>
   );

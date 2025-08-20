@@ -7,6 +7,7 @@ export default function Admin() {
   const [sessionChecked, setSessionChecked] = useState(false);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState('all'); // all | pending | resolved
   const [modalOpen, setModalOpen] = useState(false);
   const [replyDraft, setReplyDraft] = useState('');
   const [activeMessage, setActiveMessage] = useState(null);
@@ -68,7 +69,14 @@ export default function Admin() {
     <div className="admin-container">
       <div className="admin-header">
         <h1>Admin Dashboard</h1>
-        <button onClick={signOut} className="btn btn-outline cursor-target">Sign out</button>
+        <div className="admin-controls" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <div className="muted" style={{ marginRight: 8 }}>Filter:</div>
+          <button onClick={() => setStatusFilter('all')} className={`btn cursor-target ${statusFilter === 'all' ? 'btn-primary' : 'btn-outline'}`}>All</button>
+          <button onClick={() => setStatusFilter('pending')} className={`btn cursor-target ${statusFilter === 'pending' ? 'btn-primary' : 'btn-outline'}`}>Pending</button>
+          <button onClick={() => setStatusFilter('resolved')} className={`btn cursor-target ${statusFilter === 'resolved' ? 'btn-primary' : 'btn-outline'}`}>Resolved</button>
+          <div style={{ width: 8 }} />
+          <button onClick={signOut} className="btn btn-outline cursor-target admin-signout">Sign out</button>
+        </div>
       </div>
       <div className="card-panel">
         {loading ? (
@@ -87,7 +95,7 @@ export default function Admin() {
                 </tr>
               </thead>
               <tbody>
-                {messages.map((m) => (
+                {(statusFilter === 'all' ? messages : messages.filter((m) => (statusFilter === 'pending' ? (m.status !== 'resolved') : (m.status === 'resolved')))).map((m) => (
                   <tr key={m.id}>
                     <td>{m.name}</td>
                     <td>{m.email}</td>
