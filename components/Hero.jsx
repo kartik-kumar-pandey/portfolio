@@ -70,7 +70,7 @@ const Hero = ({ onSectionChange }) => {
         </div>
 
         <div className="hero-image" onClick={handleHeroImageClick} style={{ cursor: 'pointer' }}>
-          <img src="/hero.webp-" alt="Kartik Kumar Pandey" />
+          <img src="/kartik_png.png" alt="Kartik Kumar Pandey" />
         </div>
       </section>
 
@@ -174,6 +174,12 @@ const Hero = ({ onSectionChange }) => {
         .hero-image {
           position: relative;
           transition: transform 0.3s ease;
+          width: clamp(160px, 16vw, 260px);
+          height: clamp(160px, 16vw, 260px);
+          border-radius: 50%;
+          overflow: hidden;
+          display: block;
+          flex-shrink: 0;
         }
         
         .hero-image:hover {
@@ -181,7 +187,14 @@ const Hero = ({ onSectionChange }) => {
         }
         
         .hero-image img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          object-position: center 10%;
+          border-radius: inherit;
           transition: filter 0.3s ease;
+          box-shadow: 0 0 0 6px rgba(168, 85, 247, 0.9), 0 0 40px rgba(168, 85, 247, 0.35);
         }
         
         .hero-image:hover img {
