@@ -24,11 +24,11 @@ const skillCategories = {
 
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [sortBy, setSortBy] = useState('proficiency'); // 'proficiency' or 'name'
+  
 
   const categories = ['All', ...Object.keys(skillCategories)];
 
-  const filteredAndSortedSkills = useMemo(() => {
+  const filteredSkills = useMemo(() => {
     let skills = [];
     
     if (selectedCategory === 'All') {
@@ -38,16 +38,8 @@ const Skills = () => {
     } else {
       skills = skillCategories[selectedCategory] || [];
     }
-
-    // Sort skills
-    if (sortBy === 'proficiency') {
-      skills.sort((a, b) => b.proficiency - a.proficiency);
-    } else {
-      skills.sort((a, b) => a.name.localeCompare(b.name));
-    }
-
     return skills;
-  }, [selectedCategory, sortBy]);
+  }, [selectedCategory]);
 
   const getProficiencyColor = (proficiency) => {
     if (proficiency >= 90) return 'from-green-400 to-emerald-500';
@@ -73,7 +65,7 @@ const Skills = () => {
           A comprehensive overview of my technical skills and proficiency levels
         </p>
 
-        {/* Filters and Controls */}
+        {/* Filters */}
         <div className="skills-controls">
           <div className="category-filters">
             {categories.map(category => (
@@ -86,24 +78,12 @@ const Skills = () => {
               </button>
             ))}
           </div>
-          
-          <div className="sort-controls">
-            <label htmlFor="sort-select">Sort by:</label>
-            <select
-              id="sort-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="sort-select"
-            >
-              <option value="proficiency">Proficiency (High to Low)</option>
-              <option value="name">Name (A-Z)</option>
-            </select>
-          </div>
         </div>
 
-        {/* Skills Grid with Proficiency Bars */}
+        {/* Skills Grid with Proficiency Bars */
+        }
         <div className="skills-grid">
-          {filteredAndSortedSkills.map((skill, index) => (
+          {filteredSkills.map((skill, index) => (
             <div key={skill.name} className="skill-card" style={{ animationDelay: `${index * 0.1}s` }}>
               <div className="skill-header">
                 <img src={skill.icon} alt={skill.name} className="skill-icon" />
@@ -111,7 +91,6 @@ const Skills = () => {
                   <h3 className="skill-name">{skill.name}</h3>
                   <span className="skill-level">{getProficiencyLabel(skill.proficiency)}</span>
                 </div>
-                <span className="skill-percentage">{skill.proficiency}%</span>
               </div>
               
               <div className="proficiency-bar-container">
@@ -124,26 +103,6 @@ const Skills = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Skills Summary */}
-        <div className="skills-summary">
-          <div className="summary-stat">
-            <span className="stat-number">{filteredAndSortedSkills.length}</span>
-            <span className="stat-label">Skills</span>
-          </div>
-          <div className="summary-stat">
-            <span className="stat-number">
-              {Math.round(filteredAndSortedSkills.reduce((acc, skill) => acc + skill.proficiency, 0) / filteredAndSortedSkills.length)}
-            </span>
-            <span className="stat-label">Avg. Proficiency</span>
-          </div>
-          <div className="summary-stat">
-            <span className="stat-number">
-              {filteredAndSortedSkills.filter(skill => skill.proficiency >= 80).length}
-            </span>
-            <span className="stat-label">Advanced+ Skills</span>
-          </div>
         </div>
       </div>
     </section>
