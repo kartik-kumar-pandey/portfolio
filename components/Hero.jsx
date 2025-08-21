@@ -70,7 +70,7 @@ const Hero = ({ onSectionChange }) => {
         </div>
 
         <div className="hero-image" onClick={handleHeroImageClick} style={{ cursor: 'pointer' }}>
-          <img src="/hero.webp" alt="Kartik Kumar Pandey" />
+          <img src="/hero.webp-" alt="Kartik Kumar Pandey" />
         </div>
       </section>
 
