@@ -397,7 +397,7 @@ main {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 4px solid var(--accent-color);
+  border: 3px solid var(--accent-color);
   box-shadow: var(--shadow-lg), var(--glow-primary);
   transition: all var(--transition-normal);
 }

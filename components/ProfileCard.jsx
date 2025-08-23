@@ -29,7 +29,7 @@ const easeInOutCubic = (x) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
 const ProfileCardComponent = ({
-  avatarUrl = "/kartik_png.png",
+  avatarUrl = "/kartik_png-Photoroom.png",
   className = "",
   enableTilt = true,
   enableMobileTilt = false,
