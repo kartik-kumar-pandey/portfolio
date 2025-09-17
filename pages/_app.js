@@ -68,6 +68,66 @@ function MyApp({ Component, pageProps }) {
     };
   }, []);
 
+  useEffect(() => {
+    const selectors = [
+      '.reveal-init',
+      'section',
+      '.hero-text',
+      '.hero-image',
+      '.skill-card',
+      '.exp-card',
+      '.project-card',
+      '.timeline-item',
+      '.contact',
+    ];
+
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll(selectors.join(',')).forEach(el => el.classList.add('reveal-show'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-show');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
+
+    const observeTargets = () => {
+      const nodes = document.querySelectorAll(selectors.join(','));
+      nodes.forEach((el) => {
+        if (!el.classList.contains('reveal-init')) el.classList.add('reveal-init');
+        if (!el.classList.contains('reveal-show')) observer.observe(el);
+      });
+    };
+
+    // Initial attach
+    observeTargets();
+
+    // Reveal anything already in view on first paint
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.reveal-init').forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
+        if (inView) el.classList.add('reveal-show');
+      });
+    });
+
+    // Watch for DOM changes (navigations/section switches)
+    const mo = new MutationObserver(() => observeTargets());
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mo.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <DarkVeil 

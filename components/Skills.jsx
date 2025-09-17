@@ -42,27 +42,17 @@ const Skills = () => {
   }, [selectedCategory]);
 
   const getProficiencyColor = (proficiency) => {
-    if (proficiency >= 90) return 'from-green-400 to-emerald-500';
-    if (proficiency >= 80) return 'from-blue-400 to-cyan-500';
-    if (proficiency >= 70) return 'from-purple-400 to-pink-500';
-    if (proficiency >= 60) return 'from-yellow-400 to-orange-500';
-    return 'from-gray-400 to-gray-500';
+    return 'from-purple-500 to-pink-500';
   };
 
-  const getProficiencyLabel = (proficiency) => {
-    if (proficiency >= 90) return 'Expert';
-    if (proficiency >= 80) return 'Advanced';
-    if (proficiency >= 70) return 'Intermediate';
-    if (proficiency >= 60) return 'Beginner';
-    return 'Novice';
-  };
+  // Removed textual proficiency tags per request
 
   return (
     <section id="skills" className="skills">
       <div className="skills-container">
         <h2>SKILLS & EXPERTISE</h2>
         <p className="skills-subtitle">
-          A comprehensive overview of my technical skills and proficiency levels
+          A comprehensive overview of my technical skills
         </p>
 
         {/* Filters */}
@@ -89,18 +79,9 @@ const Skills = () => {
                 <img src={skill.icon} alt={skill.name} className="skill-icon" />
                 <div className="skill-info">
                   <h3 className="skill-name">{skill.name}</h3>
-                  <span className="skill-level">{getProficiencyLabel(skill.proficiency)}</span>
                 </div>
               </div>
-              
-              <div className="proficiency-bar-container">
-                <div className="proficiency-bar">
-                  <div 
-                    className={`proficiency-fill bg-gradient-to-r ${getProficiencyColor(skill.proficiency)}`}
-                    style={{ width: `${skill.proficiency}%` }}
-                  ></div>
-                </div>
-              </div>
+
             </div>
           ))}
         </div>

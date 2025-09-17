@@ -137,6 +137,19 @@ p {
   }
 }
 
+/* Scroll Reveal States */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition: opacity 600ms var(--transition-normal), transform 600ms var(--transition-normal);
+  will-change: opacity, transform;
+}
+
+.reveal-show {
+  opacity: 1;
+  transform: none;
+}
+
 @keyframes wave {
   0% { transform: rotate(0deg); }
   10% { transform: rotate(14deg); }

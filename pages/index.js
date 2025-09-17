@@ -3,7 +3,8 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Projects from '../components/Projects';
 import Skills from '../components/Skills';
-import Timeline from '../components/Timeline';
+// import Timeline from '../components/Timeline';
+import Experience from '../components/Experience';
 import Contact from '../components/Contact';
 import TargetCursor from '../components/TargetCursor';
 
@@ -28,7 +29,7 @@ const Home = () => {
       case 'skills':
         return <Skills />;
       case 'timeline':
-        return <Timeline />;
+        return <Experience />;
       case 'contact':
         return <Contact />;
       default:
