@@ -24,8 +24,6 @@ const skillCategories = {
 
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  
-
   const categories = ['All', ...Object.keys(skillCategories)];
 
   const filteredSkills = useMemo(() => {
@@ -41,16 +39,12 @@ const Skills = () => {
     return skills;
   }, [selectedCategory]);
 
-  const getProficiencyColor = (proficiency) => {
-    return 'from-purple-500 to-pink-500';
-  };
-
-  // Removed textual proficiency tags per request
+  // No extra computed styles needed; simplified component
 
   return (
     <section id="skills" className="skills">
       <div className="skills-container">
-        <h2>SKILLS & EXPERTISE</h2>
+        <h2 className="contact-title">SKILLS </h2>
         <p className="skills-subtitle">
           A comprehensive overview of my technical skills
         </p>
@@ -70,8 +64,7 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Skills Grid with Proficiency Bars */
-        }
+        {/* Skills Grid */}
         <div className="skills-grid">
           {filteredSkills.map((skill, index) => (
             <div key={skill.name} className="skill-card" style={{ animationDelay: `${index * 0.1}s` }}>

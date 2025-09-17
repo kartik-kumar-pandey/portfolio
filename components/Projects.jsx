@@ -3,7 +3,7 @@ import React from 'react';
 const Projects = () => {
   return (
     <section id="projects" className="projects">
-      <h2>Projects</h2>
+      <h2 className="contact-title">Projects</h2>
       <div className="project-list">
         <div className="project-item">
           <img src="/projects/filestashify.png" alt="FileStashify Project" className="cursor-target" />
@@ -19,7 +19,7 @@ const Projects = () => {
             <a href="https://filestashify-test.vercel.app/" target="_blank" rel="noopener noreferrer" className="project-btn live-btn cursor-target">
               View Live
             </a>
-            <a href="https://github.com/kartik-kumar-pandey/testing-File-Stashify" target="_blank" rel="noopener noreferrer" className="project-btn github-btn cursor-target">
+            <a href="https://github.com/kartik-kumar-pandey/testing-File-Stashify" target="_blank" rel="noopener noreferrer" className="project-btn github-btn">
               GitHub
             </a>
           </div>
@@ -39,7 +39,7 @@ const Projects = () => {
             <a href="https://serenitysaathi.vercel.app/" target="_blank" rel="noopener noreferrer" className="project-btn live-btn cursor-target">
               View Live
             </a>
-            <a href="https://github.com/kartik-kumar-pandey/SerenitySaathi" target="_blank" rel="noopener noreferrer" className="project-btn github-btn cursor-target">
+            <a href="https://github.com/kartik-kumar-pandey/SerenitySaathi" target="_blank" rel="noopener noreferrer" className="project-btn github-btn">
               GitHub
             </a>
           </div>

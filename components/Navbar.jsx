@@ -2,6 +2,32 @@ import React, { useState, useEffect } from 'react';
 
 const Navbar = ({ onSectionChange, activeSection, scrolled }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState('dark');
+
+  // Initialize theme from localStorage or OS preference
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('theme');
+      let initial = saved || 'dark';
+      if (!saved && typeof window !== 'undefined') {
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        initial = prefersLight ? 'light' : 'dark';
+      }
+      setTheme(initial);
+      document.documentElement.setAttribute('data-theme', initial);
+    } catch (_) {
+      // no-op
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    try { localStorage.setItem('theme', next); } catch (_) {}
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', next);
+    }
+  };
 
   const handleClick = (e, section) => {
     e.preventDefault();
@@ -53,11 +79,14 @@ const Navbar = ({ onSectionChange, activeSection, scrolled }) => {
           <li><a href="#hero" onClick={(e) => handleClick(e, 'hero')} className={`cursor-target ${activeSection === 'hero' ? 'active' : ''}`}>Home</a></li>
           <li><a href="#projects" onClick={(e) => handleClick(e, 'projects')} className={`cursor-target ${activeSection === 'projects' ? 'active' : ''}`}>Projects</a></li>
           <li><a href="#skills" onClick={(e) => handleClick(e, 'skills')} className={`cursor-target ${activeSection === 'skills' ? 'active' : ''}`}>Skills</a></li>
-          <li><a href="#timeline" onClick={(e) => handleClick(e, 'timeline')} className={`cursor-target ${activeSection === 'timeline' ? 'active' : ''}`}>Timeline</a></li>
+          <li><a href="#experience" onClick={(e) => handleClick(e, 'experience')} className={`cursor-target ${activeSection === 'experience' ? 'active' : ''}`}>Experience</a></li>
           <li><a href="#contact" onClick={(e) => handleClick(e, 'contact')} className={`cursor-target ${activeSection === 'contact' ? 'active' : ''}`}>Contact</a></li>
           <li className="nav-admin"><a href="/admin" className="cursor-target">Admin</a></li>
         </ul>
         <a href="/kartik kumar pandey.pdf" download className="resume-download cursor-target">Download Resume</a>
+        <button className="theme-toggle cursor-target" onClick={toggleTheme} aria-label="Toggle theme" title="Toggle theme">
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
         <a href="/admin" className="admin-cta cursor-target" style={{ marginLeft: '12px' }}>Admin</a>
       </div>
     </nav>

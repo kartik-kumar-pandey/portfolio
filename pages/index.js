@@ -3,10 +3,8 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Projects from '../components/Projects';
 import Skills from '../components/Skills';
-// import Timeline from '../components/Timeline';
 import Experience from '../components/Experience';
 import Contact from '../components/Contact';
-import TargetCursor from '../components/TargetCursor';
 
 const Home = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -28,7 +26,7 @@ const Home = () => {
         return <Projects />;
       case 'skills':
         return <Skills />;
-      case 'timeline':
+      case 'experience':
         return <Experience />;
       case 'contact':
         return <Contact />;

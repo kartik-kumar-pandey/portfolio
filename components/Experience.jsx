@@ -62,106 +62,70 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 relative">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16 reveal-init" style={{ transitionDelay: '0.1s' }}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Experience & Education</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4"></div>
-          <p className="text-gray-200 text-lg max-w-2xl mx-auto">
-            My journey through education and professional experiences in tech
-          </p>
-        </div>
+    <section id="experience" className="experience">
+      <div className="experience-container">
+        <h2>Experience & Education</h2>
+        <p className="experience-subtitle">
+          My journey through education and professional experiences in tech
+        </p>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-600"></div>
-
-            {experiences.map((exp, index) => (
-              <div
-                key={index}
-                className={`relative flex items-center mb-12 reveal-init ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-                style={{ transitionDelay: `${index * 0.15}s` }}
-              >
-                <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white z-10"></div>
-
-                <div className={`w-full md:w-5/12 ml-16 md:ml-0 ${
-                  index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
-                }`}>
-                  <div
-                    className="glass-effect rounded-2xl p-6 relative exp-card"
-                  >
-                    <div className="absolute -top-3 left-6">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        exp.type === 'education' 
-                          ? 'bg-green-500 text-white' 
-                          : 'bg-blue-500 text-white'
-                      }`}>
-                        {exp.type === 'education' ? 'Education' : 'Work'}
-                      </span>
-                    </div>
-
-                    <div className="flex items-start justify-between mb-4 mt-2">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md flex items-center justify-center">
-                          <exp.icon className="w-4 h-4 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-bold text-white">{exp.title}</h3>
-                          <p className="text-blue-300 font-medium">{exp.organization}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-300">
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {exp.period}
-                      </div>
-                      <div className="flex items-center">
-                        <MapPin className="w-4 h-4 mr-1" />
-                        {exp.location}
-                      </div>
-                    </div>
-
-                    <p className="text-gray-200 mb-4">{exp.description}</p>
-
-                    <div className="space-y-2">
-                      <h4 className="text-white font-medium">Key Highlights:</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {exp.highlights.map((highlight, idx) => (
-                          <div key={idx} className="flex items-center text-sm text-gray-300">
-                            <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-                            {highlight}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+        <div className="experience-timeline">
+          {experiences.map((exp, index) => (
+            <div key={index} className="experience-item">
+              <div className="experience-marker">
+                <div className="marker-icon">
+                  <exp.icon className="marker-icon-svg" />
                 </div>
               </div>
-            ))}
-          </div>
+              
+              <div className="experience-content">
+                <div className="experience-header">
+                  <span className="experience-type">{exp.type === 'education' ? 'Education' : 'Work'}</span>
+                  <h3 className="experience-title">{exp.title}</h3>
+                  <span className="experience-organization">{exp.organization}</span>
+                </div>
+                
+                <div className="experience-meta">
+                  <div className="experience-meta-item">
+                    <Calendar className="meta-icon" />
+                    {exp.period}
+                  </div>
+                  <div className="experience-meta-item">
+                    <MapPin className="meta-icon" />
+                    {exp.location}
+                  </div>
+                </div>
+
+                <p className="experience-description">{exp.description}</p>
+
+                <div className="experience-highlights">
+                  <h4>Key Highlights:</h4>
+                  <ul className="highlights-list">
+                    {exp.highlights.map((highlight, idx) => (
+                      <li key={idx} className="highlight-item">
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="mt-20 reveal-init" style={{ transitionDelay: '0.4s' }}>
-          <h3 className="text-3xl font-bold text-center mb-12 text-white">Achievements & Certifications</h3>
-          <div className="grid md:grid-cols-3 gap-6">
+        <div className="achievements-section">
+          <h3>Achievements & Certifications</h3>
+          <div className="achievements-grid">
             {[
               { title: 'Machine Learning for All', description: 'University of London (Coursera) • Completed May 2025', year: '2025' },
               { title: 'Problem Solving (Basic)', description: 'HackerRank • Earned Nov 2024', year: '2024' },
               { title: 'Introduction to Data Science', description: 'Cisco Networking Academy • Completed Jan 2025', year: '2025' }
             ].map((achievement, index) => (
-              <div
-                key={achievement.title}
-                className="glass-effect rounded-xl p-6 text-center reveal-init"
-                style={{ transitionDelay: `${index * 0.1}s` }}
-              >
-                <Award className="w-8 h-8 mx-auto mb-3 text-yellow-400" />
-                <h4 className="text-xl font-bold text-white mb-2">{achievement.title}</h4>
-                <p className="text-gray-300 text-sm mb-2">{achievement.description}</p>
-                <span className="text-blue-400 text-sm">{achievement.year}</span>
+              <div key={achievement.title} className="achievement-card">
+                <Award className="achievement-icon" />
+                <h4 className="achievement-title">{achievement.title}</h4>
+                <p className="achievement-description">{achievement.description}</p>
+                <span className="achievement-year">{achievement.year}</span>
               </div>
             ))}
           </div>

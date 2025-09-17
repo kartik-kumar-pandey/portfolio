@@ -77,33 +77,10 @@ const Hero = ({ onSectionChange }) => {
       {/* ProfileCard Modal - Only shown after clicking hero image */}
       {showProfileCard && (
         <div 
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(0, 0, 0, 0.8)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 1000,
-            animation: 'fadeIn 0.3s ease-out'
-          }}
+          className="modal-backdrop--hero"
           onClick={handleModalBackdropClick}
         >
-          <div style={{
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-            borderRadius: '20px',
-            padding: '30px',
-            maxWidth: '80vw',
-            maxHeight: '80vh',
-            overflow: 'auto',
-            position: 'relative',
-            animation: 'slideIn 0.4s ease-out',
-            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
-            border: '1px solid rgba(255, 255, 255, 0.1)'
-          }}>
+          <div className="modal-card--hero">
             
             <div style={{ textAlign: 'center' }}>
               
